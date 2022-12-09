@@ -24,7 +24,7 @@ export function CoinbaseWalletCard() {
 
   const connect = () => {
     console.log('connector', connector);
-    connector?.activate(chainId);
+    connector?.activate(5);
   };
 
   const disconnect = () => {

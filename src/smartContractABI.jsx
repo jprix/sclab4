@@ -13,58 +13,57 @@ import {
 
 export function FetchContract() {
   const { provider } = useWeb3React();
-  const address = '0x5D7eA595C044dfF343A584859A1FC4E59Aab3499';
+  const address = '0xF652E3004BF6025dFE423728257bC5096a0ACF99';
   const abi = [
     {
-      constant: true,
-      inputs: [],
-      name: 'manager',
-      outputs: [
-        {
-          name: '',
-          type: 'address',
-        },
-      ],
-      payable: false,
-      stateMutability: 'view',
-      type: 'function',
-    },
-    {
-      constant: false,
-      inputs: [],
-      name: 'pickWinner',
-      outputs: [],
-      payable: false,
-      stateMutability: 'nonpayable',
-      type: 'function',
-    },
-    {
-      constant: true,
-      inputs: [],
-      name: 'getPlayers',
-      outputs: [
-        {
-          name: '',
-          type: 'address[]',
-        },
-      ],
-      payable: false,
-      stateMutability: 'view',
-      type: 'function',
-    },
-    {
-      constant: false,
       inputs: [],
       name: 'enter',
       outputs: [],
-      payable: true,
       stateMutability: 'payable',
       type: 'function',
     },
     {
-      constant: true,
+      inputs: [],
+      name: 'pickWinner',
+      outputs: [],
+      stateMutability: 'nonpayable',
+      type: 'function',
+    },
+    {
+      inputs: [],
+      stateMutability: 'nonpayable',
+      type: 'constructor',
+    },
+    {
+      inputs: [],
+      name: 'getPlayers',
+      outputs: [
+        {
+          internalType: 'address payable[]',
+          name: '',
+          type: 'address[]',
+        },
+      ],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [],
+      name: 'manager',
+      outputs: [
+        {
+          internalType: 'address',
+          name: '',
+          type: 'address',
+        },
+      ],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
       inputs: [
         {
+          internalType: 'uint256',
           name: '',
           type: 'uint256',
         },
@@ -72,30 +71,22 @@ export function FetchContract() {
       name: 'players',
       outputs: [
         {
+          internalType: 'address payable',
           name: '',
           type: 'address',
         },
       ],
-      payable: false,
       stateMutability: 'view',
       type: 'function',
-    },
-    {
-      inputs: [],
-      payable: false,
-      stateMutability: 'nonpayable',
-      type: 'constructor',
     },
   ];
   //const [error, setError] = useState(undefined);
 
   const connect = async () => {
-    let currentProvider = ethers.providers.getNetwork('goerli');
-    console.log('provider', currentProvider);
-    const callContract = new ethers.Contract(abi, address, provider);
-    // const players = await callContract.getPlayers();
-    console.log(callContract.getValue());
-    // alert(callContract);
+    const signer = provider?.getSigner();
+    const callContract = new ethers.Contract(address, abi, signer);
+    const players = await callContract.getPlayers();
+    console.log(players);
   };
 
   return (
