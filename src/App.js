@@ -15,9 +15,9 @@ import {
   Grid,
   theme,
 } from '@chakra-ui/react';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
 import { Web3ReactProvider } from '@web3-react/core';
 import { CoinbaseWalletCard } from './coinbaseCard';
+import { FetchContract } from './smartContractABI';
 
 function App() {
   const connectors = [
@@ -27,26 +27,8 @@ function App() {
   return (
     <ChakraProvider theme={theme}>
       <Web3ReactProvider connectors={connectors}>
-        <Box textAlign="center" fontSize="xl">
-          <Grid minH="100vh" p={3}>
-            <ColorModeSwitcher justifySelf="flex-end" />
-            <VStack spacing={8}>
-              <CoinbaseWalletCard />
-              <Text>
-                Edit <Code fontSize="xl">src/App.js</Code> and save to reload.
-              </Text>
-              <Link
-                color="teal.500"
-                href="https://chakra-ui.com"
-                fontSize="2xl"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Learn Chakra
-              </Link>
-            </VStack>
-          </Grid>
-        </Box>
+        <CoinbaseWalletCard />
+        <FetchContract />
       </Web3ReactProvider>
     </ChakraProvider>
   );
