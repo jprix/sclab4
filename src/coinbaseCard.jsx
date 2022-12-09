@@ -2,6 +2,13 @@ import { useEffect, useState } from 'react';
 import { useWeb3React } from '@web3-react/core';
 import {
   Button,
+  Card,
+  Text,
+  CardBody,
+  CardHeader,
+  Heading,
+  Stack,
+  StackDivider,
   Box,
   Grid,
   VStack,
@@ -40,13 +47,31 @@ export function CoinbaseWalletCard() {
           </Button>
 
           {isActive ? (
-            <UnorderedList>
-              <ListItem>isActive: {isActive.toString()}</ListItem>
-              <ListItem>isActivating: {isActivating.toString()}</ListItem>
-              <ListItem>accounts: {accounts}</ListItem>
-              <ListItem>account: {account}</ListItem>
-              <ListItem>chainId: {chainId}</ListItem>
-            </UnorderedList>
+            <Card>
+              <CardHeader>
+                <Heading size="md">Wallet Info</Heading>
+              </CardHeader>
+
+              <CardBody>
+                <Stack divider={<StackDivider />} spacing="4">
+                  <Box>
+                    <Heading size="xs" textTransform="uppercase">
+                      Summary
+                    </Heading>
+
+                    <UnorderedList>
+                      <ListItem>isActive: {isActive.toString()}</ListItem>
+                      <ListItem>
+                        isActivating: {isActivating.toString()}
+                      </ListItem>
+                      <ListItem>accounts: {accounts}</ListItem>
+                      <ListItem>account: {account}</ListItem>
+                      <ListItem>chainId: {chainId}</ListItem>
+                    </UnorderedList>
+                  </Box>
+                </Stack>
+              </CardBody>
+            </Card>
           ) : (
             ''
           )}
